@@ -1,0 +1,70 @@
+<head>
+    <title>SciBowl Question Practice</title>
+</head>
+
+<body>
+<div class="container">
+    <div class="jumbotron">
+        <h1>Science Bowl Question Generator</h1>
+        <p>Practice for the National Science Bowl with a database of questions!</p>
+    </div>
+
+    <div class="text-center" style="padding-bottom: 25px">
+        <button class="btn btn-primary btn-lg" id="question-btn">{{#if questionDisplayed}}Get Answer{{else}}Get Question{{/if}}</button>
+        {{#if questionDisplayed}}
+            <button class="btn btn-success btn-lg" id="question-timer"><span class="glyphicon glyphicon-time"></span> Start Timer</button>
+        {{else}}
+                <button class="btn btn-warning btn-lg" id="question-back"><span class="glyphicon glyphicon-chevron-left"></span> Back</button>
+        {{/if}}
+    </div>
+    <div class="progress">
+        <div class="progress-bar" role="progressbar" style="width: {{timePercent}}%;"></div>
+    </div>
+    <div class="well well-lg text-center">
+        {{#if currentQuestion}}
+            {{#if questionDisplayed}}
+                <span>{{currentQuestion.level}}/{{currentQuestion.set_name}}/{{currentQuestion.round_name}}/{{currentQuestion.page}}/{{currentQuestion.num}}</span>
+                <br>
+                <span><b>{{#if currentQuestion.bonus}}BONUS{{else}}TOSS-UP{{/if}}</b> {{currentQuestion.category}} <i>{{currentQuestion.type}}</i></span>
+                <br>
+                <br>
+                <img src="images/{{toLower currentQuestion.level}}/{{currentQuestion.question_image}}" style="max-width: 100%;">
+            {{else}}
+                <img src="images/{{toLower currentQuestion.level}}/{{currentQuestion.answer_image}}" style="max-width: 100%;">
+            {{/if}}
+        {{else}}
+            No question to display. Select some additional options.
+        {{/if}}
+    </div>
+
+
+    <h3 class="text-center">Enabled Categories</h3>
+    <div class="btn-group btn-group-justified" id="categories">
+        <a class="btn btn-default" data-category="MATH">Math<br><span class="glyphicon glyphicon-plus"></span></a>
+        <a class="btn btn-default" data-category="EARTH SCIENCE">Earth and Space<br><span class="glyphicon glyphicon-globe"></span></a>
+        <a class="btn btn-default" data-category="CHEMISTRY">Chemistry<br><span class="glyphicon glyphicon-filter"></span></a>
+        <a class="btn btn-default" data-category="BIOLOGY">Biology<br><span class="glyphicon glyphicon-tree-deciduous"></span></a>
+        <a class="btn btn-default" data-category="PHYSICS">Physics<br><span class="glyphicon glyphicon-plane"></span></a>
+        <a class="btn btn-default" data-category="ENERGY">Energy<br><span class="glyphicon glyphicon-flash"></span></a>
+        <a class="btn btn-default" data-category="GENERAL SCIENCE">General<br><span class="glyphicon glyphicon-search"></span></a>
+        <a class="btn btn-default" data-category="COMPUTER SCIENCE">Computer Science<br><span class="glyphicon glyphicon-floppy-disk"></span></a>
+    </div>
+
+    <h3 class="text-center">Type</h3>
+    <div class="btn-group btn-group-justified center" id="types" style="width:50%; float: none; margin: 0 auto">
+        <a class="btn btn-default" data-type="MC">Multiple Choice</a>
+        <a class="btn btn-default" data-type="SA">Short Answer</a>
+    </div>
+
+    <h3 class="text-center">Difficulties</h3>
+    <div class="btn-group btn-group-justified" id="difficulties" style="width:50%; float: none; margin: 0 auto">
+        <a class="btn btn-default" data-difficulty="HS">HS</a>
+        <a class="btn btn-default" data-difficulty="MS">MS</a>
+    </div>
+</div>
+<footer class="footer" style="padding-top: 50px">
+    <div class="container">
+        <p class="text-muted">Built by <a href="http://www.github.com/bobacadodl">Ankur Sundara</a> in MeteorJS</p>
+    </div>
+</footer>
+</body>
