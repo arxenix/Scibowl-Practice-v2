@@ -55,14 +55,24 @@ Template.body.events({
             console.log("fetching question");
             Meteor.call('getQuestion', filter, function(err,data) {
                 if(!err) {
-                    Session.set('currentQuestion', data);
-                    Session.set('timerStart', null);
-                    Session.set('timePercent', 0);
+                    if(data) {
+                        console.log("got question:");
+                        console.log(data);
+                        Session.set('questionDisplayed', true);
+                        Session.set('currentQuestion', data);
+                        Session.set('timerStart', null);
+                        Session.set('timePercent', 0);
+                    }
+                    else {
+                        console.log("no matching questions found");
+                    }
                 }
                 else console.log(err);
             });
         }
-        Session.set('questionDisplayed', !Session.get('questionDisplayed'));
+        else {
+            Session.set('questionDisplayed', false);
+        }
     },
     'click #categories > a': function(e) {
         var t = $(e.currentTarget);
@@ -80,9 +90,6 @@ Template.body.events({
         }
         else if(cats[0]==="MATH") {
             cats.push("MATHEMATICS");
-        }
-        else if(cats[0]==="GENERAL SCIENCE") {
-            cats.push(null);
         }
         t.toggleClass("active");
 
